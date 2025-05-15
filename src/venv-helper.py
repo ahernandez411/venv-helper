@@ -16,7 +16,7 @@ class VenvHelper:
         self._setup_arguments(parser)
         args = parser.parse_args()
 
-        self.output_dir = args.script_dir
+        self.output_dir = "venv-scripts"
         self.action = args.action
 
 
@@ -135,14 +135,8 @@ class VenvHelper:
             "-a", "--action", 
             required=True, 
             type=str, 
-            choices=["init", "cert-setup"], 
-            help="The action to take. If 'init' is used the tool will create a script to initialize the venv. If 'cert-setup' is used it will setup trusted certificates in the venv using the system and user certs."
-        )
-        parser.add_argument(
-            "-d", "--script-dir",
-            required=True,
-            type=str,
-            help="The name of the directory where the script should be saved. If the directory does not already exist, it will be created"
+            choices=["init-venv", "cert-setup"], 
+            help="The action to take. Use 'init-venv' to initialize the venv. Use 'cert-setup' to allow venv to trust user and system certificates."
         )
        
 

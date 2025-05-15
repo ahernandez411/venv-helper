@@ -5,16 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run Init",
+            "name": "Run Init Venv",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/src/venv-helper.py",
             "console": "integratedTerminal",
             "args": [
-                "--script-dir", 
-                "temp",
                 "--action",
-                "init"
+                "init-venv"
             ]
         },
         {
@@ -24,8 +22,6 @@
             "program": "${workspaceFolder}/src/venv-helper.py",
             "console": "integratedTerminal",
             "args": [
-                "--script-dir", 
-                "temp",
                 "--action",
                 "cert-setup"
             ]
