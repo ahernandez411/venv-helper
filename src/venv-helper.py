@@ -2,7 +2,7 @@
 import argparse
 import os
 
-class Main:
+class VenvHelper:
     def __init__(self):
         print("")
         print("--------------------------------------------------")
@@ -16,8 +16,7 @@ class Main:
         self._setup_arguments(parser)
         args = parser.parse_args()
 
-        self.path_full_root = args.root_full_path
-        self.output_dir = args.output_dir        
+        self.output_dir = args.script_dir
         self.action = args.action
 
 
@@ -55,6 +54,8 @@ class Main:
             "# Run this tool if you have added the Root CA to your Linux WSL instance",
             "# https://github.com/im-platform/insights-main/blob/main/scripts/corp-laptop-elevated-addons.md#add-internal-root-ca-for-https-proxy--other-internal-certificates-to-ubuntu-linux",
             "",
+            "echo 'Import system and user certificates into venv'",
+            "",
             "if ! dpkg -s ca-certificates >/dev/null 2>&1; then"
             f"{tab}echo 'Trust system and user certificates'",
             f"{tab}sudo apt update",
@@ -67,8 +68,8 @@ class Main:
         print("- Add lines to backup old cacert.pem and then create new one in its place")
         for cacert_pem_path in cacert_pem_paths:
             cacert_pem_path_bak = f"{cacert_pem_path}.bak"
-            lines.append("")
-            lines.append("echo 'Backup the origninal cacert.pem file just in case'")            
+            lines.append("echo ''")
+            lines.append(f"echo 'Backup file just in case {cacert_pem_path}'")
             lines.append(f"mv {cacert_pem_path} {cacert_pem_path_bak}")
             lines.append("")
             lines.append("echo 'create symbolic link to ca-certificates.crt and rename it as cacert.pem'")
@@ -90,13 +91,13 @@ class Main:
 
         lines = [
             "#!/bin/bash",
-            "",
+            "echo ''",
             "echo 'Create virtual-environment directory'",
             "python3 -m venv venv",
-            "",
+            "echo ''",
             "echo 'Activate the virtual-environment'",
             "source venv/bin/activate",
-            "",
+            "echo ''",
             "echo 'Install requests'",
             "pip install requests",
             ""
@@ -113,7 +114,7 @@ class Main:
     def _find_cacert_pem_files(self) -> list:
         file_matches = []
         find = "cacert.pem"
-        path_start = os.path.join(self.path_full_root, "venv")
+        path_start = "venv"
         print(f"- Find {find} in {path_start}...")
 
         if not os.path.exists(path_start):
@@ -131,26 +132,20 @@ class Main:
 
     def _setup_arguments(self, parser: argparse.ArgumentParser):
         parser.add_argument(
-            "-p", "--root-full-path", 
-            required=True, 
-            type=str, 
-            help="The root path of your python project"
-        )
-        parser.add_argument(
-            "-o", "--output-dir",
-            required=True,
-            type=str,
-            help="The output directory to save scripts that will be run"
-        )
-        parser.add_argument(
             "-a", "--action", 
             required=True, 
             type=str, 
             choices=["init", "cert-setup"], 
-            help="The action to take. Value should be 'init' or 'cert'"
+            help="The action to take. If 'init' is used the tool will create a script to initialize the venv. If 'cert-setup' is used it will setup trusted certificates in the venv using the system and user certs."
+        )
+        parser.add_argument(
+            "-d", "--script-dir",
+            required=True,
+            type=str,
+            help="The name of the directory where the script should be saved. If the directory does not already exist, it will be created"
         )
        
 
 
 if __name__ == "__main__":
-    Main().run()
+    VenvHelper().run()

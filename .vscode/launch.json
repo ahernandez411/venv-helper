@@ -8,12 +8,10 @@
             "name": "Run Init",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/src/main.py",
+            "program": "${workspaceFolder}/src/venv-helper.py",
             "console": "integratedTerminal",
             "args": [
-                "--root-full-path",
-                "/home/adam/github/ahernandez411/venv-helper",
-                "--output-dir", 
+                "--script-dir", 
                 "temp",
                 "--action",
                 "init"
@@ -23,12 +21,10 @@
             "name": "Run Cert Setup",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/src/src/venv-helper.py",
+            "program": "${workspaceFolder}/src/venv-helper.py",
             "console": "integratedTerminal",
             "args": [
-                "--root-full-path",
-                "/home/adam/github/ahernandez411/venv-helper",
-                "--output-dir", 
+                "--script-dir", 
                 "temp",
                 "--action",
                 "cert-setup"
