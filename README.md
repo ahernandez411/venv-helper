@@ -1,6 +1,8 @@
 # Virtual Environment Helper
 
-This tool helps with the creation of python virtual environments (venv). Once the venv is created it also has the ability to setup system and user certificate trusts in the venv.
+This tool helps with the creation of python virtual environments (venv). Once the venv is created it also has the ability to setup system and user certificate trusts in the venv. 
+
+>Note:<br />This tool has only been tested in WSL Ubuntu distribution. It has not been tested anywhere else.
 
 ## Setup Alias for Tool
 
