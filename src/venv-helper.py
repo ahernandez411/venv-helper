@@ -18,6 +18,7 @@ class VenvHelper:
 
         self.output_dir = "venv-scripts"
         self.action = args.action
+        print(f"- Running in Mode: '{self.action}'")
 
 
     def run(self):    
@@ -26,7 +27,7 @@ class VenvHelper:
        print("Run Virtual Environment Helper")
        print("--------------------------------------------------")
 
-       if self.action == "init":
+       if self.action == "init-venv":
            print(f"- Create init script in {self.output_dir}")
            self._create_init_script()
        
