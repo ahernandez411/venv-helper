@@ -11,7 +11,7 @@ class VenvHelper:
 
         parser = argparse.ArgumentParser(
             prog="Virtual Environment Helper",
-            description="The tool will either help initialize your virtual environment or set it up with your user and os level certificates",
+            description="The tool will either help initialize your virtual environment or set it up with your user and os level certificates within a WSL distribution",
         )        
         self._setup_arguments(parser)
         args = parser.parse_args()
@@ -52,7 +52,6 @@ class VenvHelper:
             "#!/bin/bash"
             "",
             "# Run this tool if you have added the Root CA to your Linux WSL instance",
-            "# https://github.com/im-platform/insights-main/blob/main/scripts/corp-laptop-elevated-addons.md#add-internal-root-ca-for-https-proxy--other-internal-certificates-to-ubuntu-linux",
             "",
             "echo 'Import system and user certificates into venv'",
             "",
