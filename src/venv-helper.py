@@ -12,13 +12,14 @@ class VenvHelper:
         parser = argparse.ArgumentParser(
             prog="Virtual Environment Helper",
             description="The tool will either help initialize your virtual environment or set it up with your user and os level certificates within a WSL distribution",
+            formatter_class=argparse.RawTextHelpFormatter
         )        
         self._setup_arguments(parser)
         args = parser.parse_args()
 
         self.output_dir = "venv-scripts"
-        self.action = args.action
-        print(f"- Running in Mode: '{self.action}'")
+        self.script_type = args.script_type
+        print(f"- Running in Mode: '{self.script_type}'")
 
 
     def run(self):    
@@ -27,11 +28,11 @@ class VenvHelper:
        print("Run Virtual Environment Helper")
        print("--------------------------------------------------")
 
-       if self.action == "init-venv":
+       if self.script_type == "init-venv":
            print(f"- Create init script in {self.output_dir}")
            self._create_init_script()
        
-       elif self.action == "cert-setup":
+       elif self.script_type == "cert-setup":
            print(f"- Create cert setup script in {self.output_dir}")
            self._create_cert_setup_script()
        
@@ -137,12 +138,13 @@ class VenvHelper:
 
 
     def _setup_arguments(self, parser: argparse.ArgumentParser):
+        tab = "\t"
         parser.add_argument(
-            "-a", "--action", 
+            "-t", "--script-type", 
             required=True, 
             type=str, 
             choices=["init-venv", "cert-setup"], 
-            help="The action to take. Use 'init-venv' to initialize the venv. Use 'cert-setup' to allow venv to trust user and system certificates."
+            help=f"The script type to create. The tool will have instructions in the log stating how to run the script afterwards.{os.linesep}- Use 'init-venv' to initialize the venv.{os.linesep}- Use 'cert-setup' to allow venv to trust user and system certificates."
         )
        
 

@@ -11,7 +11,7 @@
             "program": "${workspaceFolder}/src/venv-helper.py",
             "console": "integratedTerminal",
             "args": [
-                "--action",
+                "--script-type",
                 "init-venv"
             ]
         },
@@ -22,7 +22,7 @@
             "program": "${workspaceFolder}/src/venv-helper.py",
             "console": "integratedTerminal",
             "args": [
-                "--action",
+                "--script-type",
                 "cert-setup"
             ]
         }
