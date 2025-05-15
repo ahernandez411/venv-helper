@@ -83,6 +83,9 @@ class VenvHelper:
             writer.write(script)
 
         print(f"- Saved cert setup script to {path_cert_setup}")
+        print("")
+        print("Run the following command:")
+        print("- 'bash venv-scripts/cert-setup.sh'")
        
 
     def _create_init_script(self):
@@ -109,6 +112,9 @@ class VenvHelper:
             writer.write(script)
 
         print(f"- Saved init-script to {path_output}")
+        print("")
+        print("Run the following command:")
+        print("- 'bash venv-scripts/init-venv.sh'")
        
 
     def _find_cacert_pem_files(self) -> list:
